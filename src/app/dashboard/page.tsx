@@ -1,6 +1,18 @@
 import { redirect } from 'next/navigation'
-
 import { createClient } from '@/utils/supabase/server'
+import LessonContainer from '../../components/LessonContainer'
+
+// Define a type to match the structure from Supabase
+interface UserLesson {
+  lesson_id: string;
+  is_completed: boolean;
+  lessons: {
+    start_time: string;
+    end_time: string;
+    subject: string;
+    location: string;
+  };
+}
 
 export default async function Dashboard() {
   const supabase = await createClient()
@@ -9,6 +21,51 @@ export default async function Dashboard() {
   if (error || !data?.user) {
     redirect('/login')
   }
+  
+  // Fetch user lessons from Supabase
+  const { data: userLessons, error: lessonsError } = await supabase
+    .from('user_lessons')
+    .select('lesson_id, is_completed, lessons(start_time, end_time, subject, location)')
+    .eq('user_id', data.user.id)
+  
+  if (lessonsError) {
+    console.error('Error fetching lessons:', lessonsError)
+  }
+  
+  // Transform the data structure with proper typing
+  const formattedLessons = (userLessons as UserLesson[] || []).map(item => ({
+    id: item.lesson_id,
+    userId: data.user.id,
+    completed: item.is_completed,
+    start_time: item.lessons?.start_time || null,
+    end_time: item.lessons?.end_time || null,
+    subject: item.lessons?.subject || 'No subject',
+    location: item.lessons?.location || 'No location',
+  }))
 
-  return <p>Hello {data.user.email}</p>
+  return (
+    <div className="flex flex-col">
+      <main className="w-full max-w-6xl mx-auto pl-0 pr-1 sm:pl-0.5 sm:pr-2 md:pl-1 md:pr-3 lg:pl-1.5 lg:pr-4">
+        <div className="text-left my-6">
+          <div className="overflow-hidden py-0.5">
+            <h1 className="text-3xl font-bold animate-fade-in-down">
+              Welcome back,
+            </h1>
+          </div>
+          <div className="overflow-hidden pt-0.5 pb-1">
+            <h1 className="text-5xl font-bold flex items-center animate-fade-in-down animation-delay-300">
+              {data.user.email?.split('@')[0] || 'User'}!{' '}
+              <span className="ml-2 inline-block">👋</span>
+            </h1>
+          </div>
+        </div>
+        
+        {/* Dashboard content */}
+        <div className="grid grid-cols-1 gap-4">
+          {/* LessonContainer now receives lessons as props */}
+          <LessonContainer initialLessons={formattedLessons} userId={data.user.id} />
+        </div>
+      </main>
+    </div>
+  )
 }
