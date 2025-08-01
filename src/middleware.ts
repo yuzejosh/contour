@@ -13,7 +13,8 @@ export const config = {
      * - Auth routes (/login, /reset-password, etc.)
      * - Static files (/_next, /favicon.ico, etc.)
      * - API routes (/api/*)
+     * - Files with extensions (images, etc.)
      */
-    '/((?!_next|login|reset-password|verify|auth|images|api|favicon.ico).*)',
+    '/((?!_next|login|reset-password|verify|auth|images|api|favicon.ico|.*\\..*).*)',
   ],
 }
