@@ -3,6 +3,18 @@ import { createClient } from '@/utils/supabase/server'
 import LessonContainer from '../../components/LessonContainer'
 import LogoutButton from '../../components/LogoutButton'
 
+// Define proper types for the data structure
+interface UserLesson {
+  lesson_id: string;
+  is_completed: boolean;
+  lessons: {
+    start_time: string | null;
+    end_time: string | null;
+    subject: string;
+    location: string;
+  };
+}
+
 export default async function Dashboard() {
   const supabase = await createClient()
 
@@ -21,8 +33,8 @@ export default async function Dashboard() {
     console.error('Error fetching lessons:', lessonsError)
   }
   
-  // Transform the data structure - now that we know lessons is an object, not an array
-  const formattedLessons = userLessons?.map(item => ({
+  // Transform the data structure with proper typing
+  const formattedLessons = (userLessons as UserLesson[] || []).map(item => ({
     id: item.lesson_id,
     userId: data.user.id,
     completed: item.is_completed,
