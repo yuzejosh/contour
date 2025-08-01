@@ -4,7 +4,7 @@ import { useEffect, useState, Suspense } from 'react';
 import { createBrowserClient } from '@supabase/ssr';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-export default function ResetPasswordForm() {
+function ResetPasswordForm() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -56,7 +56,7 @@ export default function ResetPasswordForm() {
     };
     
     processToken();
-  }, [searchParams, supabase.auth]);
+  }, [searchParams, supabase.auth, message]);
 
   const handleResetPassword = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -151,5 +151,13 @@ export default function ResetPasswordForm() {
         </form>
       </div>
     </div>
+  );
+}
+
+export default function ResetPasswordPage() {
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center min-h-screen">Loading...</div>}>
+      <ResetPasswordForm />
+    </Suspense>
   );
 }
