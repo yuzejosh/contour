@@ -5,15 +5,15 @@ export async function middleware(request: NextRequest) {
   return await updateSession(request)
 }
 
+// Add specific paths that need authentication middleware
 export const config = {
   matcher: [
     /*
-     * Match all request paths except for the ones starting with:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * Feel free to modify this pattern to include more paths.
+     * Match all request paths except:
+     * - Auth routes (/login, /reset-password, etc.)
+     * - Static files (/_next, /favicon.ico, etc.)
+     * - API routes (/api/*)
      */
-    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+    '/((?!_next|login|reset-password|verify|auth|images|api|favicon.ico).*)',
   ],
 }

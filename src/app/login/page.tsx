@@ -2,6 +2,7 @@ import { login, signup } from './actions';
 import Image from 'next/image';
 import { createClient } from '@/utils/supabase/server'
 import { redirect } from 'next/navigation';
+import ForgotPasswordButton from '@/components/ForgotPasswordButton';
 
 export default async function LoginPage() {
 
@@ -66,23 +67,9 @@ export default async function LoginPage() {
             </div>
           </div>
           
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <input
-                id="remember-me"
-                name="remember-me"
-                type="checkbox"
-                className="h-4 w-4 text-[#007FFF] focus:ring-[#007FFF] border-gray-300 rounded"
-              />
-              <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
-                Remember me
-              </label>
-            </div>
-            
+          <div className="flex items-center justify-end">
             <div className="text-sm">
-              <a href="#" className="font-medium text-[#007FFF] hover:text-[#0066CC]">
-                Forgot password?
-              </a>
+              <ForgotPasswordButton />
             </div>
           </div>
           
