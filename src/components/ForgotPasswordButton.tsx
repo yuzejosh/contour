@@ -55,7 +55,7 @@ export default function ForgotPasswordButton() {
           <div className="bg-white p-6 rounded-lg shadow-xl max-w-md w-full dark:bg-gray-800">
             <h3 className="text-lg font-medium mb-4 text-gray-900 dark:text-white">Reset Password</h3>
             <p className="text-sm text-gray-600 mb-4 dark:text-gray-300">
-              Enter your email and we'll send you a link to reset your password.
+              Enter your email and we&apos;ll send you a link to reset your password.
             </p>
             
             {/* Changed from form to div to avoid nesting forms */}

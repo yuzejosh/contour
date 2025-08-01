@@ -54,6 +54,22 @@ export default function ResetPasswordPage() {
     processToken();
   }, [searchParams, supabase.auth]);
 
+  useEffect(() => {
+    // Check if we have an access token in the URL
+    const checkSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      // For password reset, the user should have a valid session but still be on the recovery path
+      if (!session) {
+        setMessage(message || 'Please use the link from your email to reset your password.');
+      } else {
+        console.log('Session detected, you can reset your password');
+      }
+    };
+    
+    checkSession();
+  }, [supabase.auth, message]);
+
   const handleResetPassword = async (e: React.FormEvent) => {
     e.preventDefault();
     
