@@ -1,12 +1,14 @@
-import React from 'react';
+"use client";
+
+import React, { useState } from 'react';
 import LessonCard from './LessonCard';
 
 interface Lesson {
   id: string;
   userId: string;
   completed: boolean;
-  start_time: string;
-  end_time: string;
+  start_time: string | null;
+  end_time: string | null;
   subject: string;
   location: string;
 }
@@ -17,9 +19,22 @@ interface LessonContainerProps {
 }
 
 const LessonContainer: React.FC<LessonContainerProps> = ({ initialLessons, userId }) => {
+  // Use state to manage lessons so we can update when completion status changes
+  const [lessons, setLessons] = useState(initialLessons);
+  
   // Split lessons into upcoming and completed
-  const upcomingLessons = initialLessons.filter(lesson => !lesson.completed);
-  const completedLessons = initialLessons.filter(lesson => lesson.completed);
+  const upcomingLessons = lessons.filter(lesson => !lesson.completed);
+  const completedLessons = lessons.filter(lesson => lesson.completed);
+
+  // Handle lesson status change
+  const handleLessonStatusChange = (updatedLesson: Lesson) => {
+    console.log('Status changed:', updatedLesson);
+    setLessons(prevLessons => 
+      prevLessons.map(lesson => 
+        lesson.id === updatedLesson.id ? updatedLesson : lesson
+      )
+    );
+  };
 
   return (
     <div className="w-full max-w-4xl mx-auto my-8" id="lesson-container">
@@ -29,7 +44,11 @@ const LessonContainer: React.FC<LessonContainerProps> = ({ initialLessons, userI
           <div className="space-y-4">
             {upcomingLessons.length > 0 ? (
               upcomingLessons.map((lesson) => (
-                <LessonCard key={lesson.id} lesson={lesson} />
+                <LessonCard 
+                  key={lesson.id} 
+                  lesson={lesson} 
+                  onStatusChange={handleLessonStatusChange}
+                />
               ))
             ) : (
               <div className="p-4 border border-gray-200 rounded-lg bg-white text-gray-500">
@@ -44,7 +63,11 @@ const LessonContainer: React.FC<LessonContainerProps> = ({ initialLessons, userI
           <div className="space-y-4">
             {completedLessons.length > 0 ? (
               completedLessons.map((lesson) => (
-                <LessonCard key={lesson.id} lesson={lesson} />
+                <LessonCard 
+                  key={lesson.id} 
+                  lesson={lesson} 
+                  onStatusChange={handleLessonStatusChange}
+                />
               ))
             ) : (
               <div className="p-4 border border-gray-200 rounded-lg bg-white text-gray-500">
