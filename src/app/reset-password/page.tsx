@@ -1,22 +1,22 @@
 "use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { createBrowserClient } from '@supabase/ssr';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-export default function ResetPasswordPage() {
+export default function ResetPasswordForm() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const searchParams = useSearchParams();
   const router = useRouter();
+  const searchParams = useSearchParams();
   
   const supabase = createBrowserClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
   );
-
+  
   // Check for token in URL
   useEffect(() => {
     const processToken = async () => {
@@ -48,8 +48,8 @@ export default function ResetPasswordPage() {
       
       // Check session status regardless of token
       const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        setMessage(message || 'No active session. Please use the link from your email to reset your password.');
+      if (!session && !message) {
+        setMessage('Please use the link from your email to reset your password.');
       }
       
       setIsLoading(false);
@@ -57,22 +57,6 @@ export default function ResetPasswordPage() {
     
     processToken();
   }, [searchParams, supabase.auth]);
-
-  useEffect(() => {
-    // Check if we have an access token in the URL
-    const checkSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      
-      // For password reset, the user should have a valid session but still be on the recovery path
-      if (!session) {
-        setMessage(message || 'Please use the link from your email to reset your password.');
-      } else {
-        console.log('Session detected, you can reset your password');
-      }
-    };
-    
-    checkSession();
-  }, [supabase.auth, message]);
 
   const handleResetPassword = async (e: React.FormEvent) => {
     e.preventDefault();

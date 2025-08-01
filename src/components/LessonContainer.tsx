@@ -15,10 +15,9 @@ interface Lesson {
 
 interface LessonContainerProps {
   initialLessons: Lesson[];
-  userId: string;
 }
 
-const LessonContainer: React.FC<LessonContainerProps> = ({ initialLessons, userId }) => {
+const LessonContainer: React.FC<LessonContainerProps> = ({ initialLessons }) => {
   // Use state to manage lessons so we can update when completion status changes
   const [lessons, setLessons] = useState(initialLessons);
   

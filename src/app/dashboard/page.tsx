@@ -69,7 +69,7 @@ export default async function Dashboard() {
         {/* Dashboard content */}
         <div className="grid grid-cols-1 gap-4">
           {/* LessonContainer now receives lessons as props */}
-          <LessonContainer initialLessons={formattedLessons} userId={data.user.id} />
+          <LessonContainer initialLessons={formattedLessons}/>
         </div>
       </main>
     </div>
