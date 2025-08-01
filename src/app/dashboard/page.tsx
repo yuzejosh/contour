@@ -34,7 +34,7 @@ export default async function Dashboard() {
   }
   
   // Transform the data structure with proper typing
-  const formattedLessons = (userLessons as UserLesson[] || []).map(item => ({
+  const formattedLessons = (userLessons as unknown as UserLesson[] || []).map(item => ({
     id: item.lesson_id,
     userId: data.user.id,
     completed: item.is_completed,

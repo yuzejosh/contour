@@ -41,7 +41,7 @@ const LessonCard: React.FC<LessonCardProps> = ({ lesson: initialLesson, onStatus
         minute: '2-digit',
         hour12: true
       }).format(date);
-    } catch (error) {
+    } catch {
       return 'Date error';
     }
   };
