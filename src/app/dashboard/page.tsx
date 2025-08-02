@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/utils/supabase/server'
+import { PostgrestError } from '@supabase/supabase-js'
 import LessonContainer from '../../components/LessonContainer'
 import LogoutButton from '../../components/LogoutButton'
 
@@ -27,7 +28,7 @@ export default async function Dashboard() {
   const { data: userLessons, error: lessonsError } = await supabase
     .from('user_lessons')
     .select('lesson_id, is_completed, lessons(start_time, end_time, subject, location)')
-    .eq('user_id', data.user.id) as { data: UserLesson[] | null, error: any }
+    .eq('user_id', data.user.id) as { data: UserLesson[] | null, error: PostgrestError | null }
   
   // Transform the data structure with proper typing
   const formattedLessons = (userLessons || []).map(item => ({
