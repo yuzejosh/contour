@@ -1,7 +1,7 @@
 # Contour Education Website
 
 Hi! 👋  
-This is a website I built for Contour Education over the last couple of days. It's deployed on Vercel and can be found [here](https://contour-33n6cyixw-yuzejoshs-projects.vercel.app)
+This is a website I built for Contour Education over the last couple of days. It's deployed on Vercel and can be found [here](https://contour-app.vercel.app/login)
 
 ## Tech Stack
 
