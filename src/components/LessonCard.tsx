@@ -1,6 +1,8 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
+import { toast } from 'react-toastify';
+import { format } from 'date-fns';
 
 interface Lesson {
   id: string;
@@ -23,7 +25,7 @@ const LessonCard: React.FC<LessonCardProps> = ({ lesson: initialLesson, onStatus
   const [isUpdating, setIsUpdating] = useState(false);
   
   // Format the date and time for display with proper error handling
-  const formatDateTime = (dateString: string | null) => {
+  const formatDateTime = useCallback((dateString: string | null) => {
     try {
       if (!dateString) return 'Time not scheduled';
       
@@ -33,21 +35,14 @@ const LessonCard: React.FC<LessonCardProps> = ({ lesson: initialLesson, onStatus
         return 'Invalid date';
       }
       
-      return new Intl.DateTimeFormat('en-US', {
-        weekday: 'short',
-        month: 'short',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: '2-digit',
-        hour12: true
-      }).format(date);
+      return format(date, 'EEE, MMM d, h:mm a');
     } catch {
       return 'Date error';
     }
-  };
+  }, []);
 
   // Calculate duration in minutes
-  const getDuration = () => {
+  const getDuration = useCallback(() => {
     try {
       if (!lesson.start_time || !lesson.end_time) return 'N/A';
       
@@ -63,10 +58,10 @@ const LessonCard: React.FC<LessonCardProps> = ({ lesson: initialLesson, onStatus
     } catch {
       return 'N/A';
     }
-  };
+  }, [lesson.start_time, lesson.end_time]);
 
   // Handler that sends the lesson_id to the API and notifies parent component
-  const handleCompletionToggle = async () => {
+  const handleCompletionToggle = useCallback(async () => {
     // Optimistic UI update - toggle the current state
     setIsUpdating(true);
     const newCompletedState = !lesson.completed;
@@ -105,7 +100,7 @@ const LessonCard: React.FC<LessonCardProps> = ({ lesson: initialLesson, onStatus
         // Notify parent about reversion
         onStatusChange(revertedLesson);
         
-        alert('Failed to update lesson status. Please try again.');
+        toast('Failed to update lesson status. Please try again.');
       }
     } catch (error) {
       // Handle network errors
@@ -118,11 +113,11 @@ const LessonCard: React.FC<LessonCardProps> = ({ lesson: initialLesson, onStatus
       // Notify parent about reversion
       onStatusChange(revertedLesson);
       
-      alert('Network error while updating lesson status. Please try again.');
+      toast('Network error while updating lesson status. Please try again.');
     } finally {
       setIsUpdating(false);
     }
-  };
+  }, [lesson, onStatusChange]);
 
   return (
     <div 

@@ -56,9 +56,9 @@ export default function ForgotPasswordButton() {
 
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-xl max-w-md w-full dark:bg-gray-800">
-            <h3 className="text-lg font-medium mb-4 text-gray-900 dark:text-white">Reset Password</h3>
-            <p className="text-sm text-gray-600 mb-4 dark:text-gray-300">
+          <div className="bg-white p-6 rounded-lg shadow-xl max-w-md w-full ">
+            <h3 className="text-lg font-medium mb-4 text-gray-900 ">Reset Password</h3>
+            <p className="text-sm text-gray-600 mb-4 ">
               Enter your email and we&apos;ll send you a link to reset your password.
             </p>
             
@@ -70,7 +70,7 @@ export default function ForgotPasswordButton() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Your email address"
                 required
-                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#007FFF] focus:border-[#007FFF] dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#007FFF] focus:border-[#007FFF]"
               />
               
               {message && (
@@ -83,7 +83,7 @@ export default function ForgotPasswordButton() {
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-transparent rounded-md hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
+                  className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-transparent rounded-md hover:bg-gray-200"
                 >
                   Cancel
                 </button>

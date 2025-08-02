@@ -15,7 +15,7 @@ export default async function LoginPage() {
 
   return (
     <div className="flex items-center justify-center min-h-[80vh] px-4">
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
+      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
         <div className="text-center">
           <div className="flex justify-center mb-4">
             <Image 
@@ -26,10 +26,10 @@ export default async function LoginPage() {
               priority
             />
           </div>
-          <h2 className="mt-6 text-3xl font-bold text-gray-900 dark:text-white">
+          <h2 className="mt-6 text-3xl font-bold text-gray-900">
             Welcome!
           </h2>
-          <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+          <p className="mt-2 text-sm text-gray-600">
             Sign in to your account or create a new one
           </p>
         </div>
@@ -37,7 +37,7 @@ export default async function LoginPage() {
         <form className="mt-8 space-y-6">
           <div className="space-y-4">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                 Email address
               </label>
               <input
@@ -46,13 +46,13 @@ export default async function LoginPage() {
                 type="email"
                 autoComplete="email"
                 required
-                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#007FFF] focus:border-[#007FFF] dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#007FFF] focus:border-[#007FFF]"
                 placeholder="name@example.com"
               />
             </div>
             
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                 Password
               </label>
               <input
@@ -61,7 +61,7 @@ export default async function LoginPage() {
                 type="password"
                 autoComplete="current-password"
                 required
-                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#007FFF] focus:border-[#007FFF] dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#007FFF] focus:border-[#007FFF]"
                 placeholder="••••••••"
               />
             </div>
@@ -82,7 +82,7 @@ export default async function LoginPage() {
             </button>
             <button
               formAction={signup}
-              className="w-full flex justify-center py-2 px-4 border border-[#007FFF] rounded-md shadow-sm text-sm font-medium text-[#007FFF] bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#007FFF] dark:bg-transparent dark:hover:bg-gray-700 dark:text-[#66b2ff] dark:border-[#66b2ff]"
+              className="w-full flex justify-center py-2 px-4 border border-[#007FFF] rounded-md shadow-sm text-sm font-medium text-[#007FFF] bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#007FFF]"
             >
               Create new account
             </button>

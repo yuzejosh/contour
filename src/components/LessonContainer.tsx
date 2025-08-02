@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import LessonCard from './LessonCard';
 
 interface Lesson {
@@ -22,18 +22,18 @@ const LessonContainer: React.FC<LessonContainerProps> = ({ initialLessons }) => 
   const [lessons, setLessons] = useState(initialLessons);
   
   // Split lessons into upcoming and completed
-  const upcomingLessons = lessons.filter(lesson => !lesson.completed);
-  const completedLessons = lessons.filter(lesson => lesson.completed);
+  const upcomingLessons = useMemo(() => lessons.filter(lesson => !lesson.completed), [lessons]);
+  const completedLessons = useMemo(() => lessons.filter(lesson => lesson.completed), [lessons]);
 
   // Handle lesson status change
-  const handleLessonStatusChange = (updatedLesson: Lesson) => {
+  const handleLessonStatusChange = useCallback((updatedLesson: Lesson) => {
     console.log('Status changed:', updatedLesson);
     setLessons(prevLessons => 
       prevLessons.map(lesson => 
         lesson.id === updatedLesson.id ? updatedLesson : lesson
       )
     );
-  };
+  }, []);
 
   return (
     <div className="w-full max-w-4xl mx-auto my-8" id="lesson-container">

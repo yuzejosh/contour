@@ -12,7 +12,7 @@ This is a website I built for Contour Education over the last couple of days. It
 
 ## Features
 
-- ✨ Responsive design with dark mode support (work in progress)
+- ✨ Responsive design
 - 🔐 Authentication system with Supabase
 - 🎨 Clean, modern UI with Contour Education branding
 - ✔️ Ability to check and uncheck lessons when complete

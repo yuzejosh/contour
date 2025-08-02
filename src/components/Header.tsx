@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const Header: React.FC = () => {
   return (
-    <header className="bg-white dark:bg-gray-700 text-[#007FFF] dark:text-[#66b2ff] p-4 flex justify-center items-center shadow-sm">
+    <header className="bg-white text-[#007FFF] p-4 flex justify-center items-center shadow-sm">
       <div className="flex justify-center items-center">
         <Link href="https://www.contoureducation.com.au/">
           <Image 

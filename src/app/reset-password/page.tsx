@@ -88,12 +88,12 @@ function ResetPasswordForm() {
 
   return (
     <div className="flex items-center justify-center min-h-screen px-4">
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
+      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
         <div className="text-center">
-          <h2 className="mt-6 text-3xl font-bold text-gray-900 dark:text-white">
+          <h2 className="mt-6 text-3xl font-bold text-gray-900">
             Reset Your Password
           </h2>
-          <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+          <p className="mt-2 text-sm text-gray-600">
             Enter your new password below
           </p>
         </div>
@@ -101,7 +101,7 @@ function ResetPasswordForm() {
         <form className="mt-8 space-y-6" onSubmit={handleResetPassword}>
           <div className="space-y-4">
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                 New Password
               </label>
               <input
@@ -111,13 +111,13 @@ function ResetPasswordForm() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#007FFF] focus:border-[#007FFF] dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#007FFF] focus:border-[#007FFF]"
                 placeholder="••••••••"
               />
             </div>
             
             <div>
-              <label htmlFor="confirm-password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label htmlFor="confirm-password" className="block text-sm font-medium text-gray-700">
                 Confirm New Password
               </label>
               <input
@@ -127,7 +127,7 @@ function ResetPasswordForm() {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
-                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#007FFF] focus:border-[#007FFF] dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#007FFF] focus:border-[#007FFF]"
                 placeholder="••••••••"
               />
             </div>
