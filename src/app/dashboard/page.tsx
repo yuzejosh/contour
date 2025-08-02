@@ -27,14 +27,10 @@ export default async function Dashboard() {
   const { data: userLessons, error: lessonsError } = await supabase
     .from('user_lessons')
     .select('lesson_id, is_completed, lessons(start_time, end_time, subject, location)')
-    .eq('user_id', data.user.id)
-  
-  if (lessonsError) {
-    console.error('Error fetching lessons:', lessonsError)
-  }
+    .eq('user_id', data.user.id) as { data: UserLesson[] | null, error: any }
   
   // Transform the data structure with proper typing
-  const formattedLessons = (userLessons as unknown as UserLesson[] || []).map(item => ({
+  const formattedLessons = (userLessons || []).map(item => ({
     id: item.lesson_id,
     userId: data.user.id,
     completed: item.is_completed,
@@ -42,7 +38,7 @@ export default async function Dashboard() {
     end_time: item.lessons?.end_time || null,
     subject: item.lessons?.subject || 'No subject',
     location: item.lessons?.location || 'No location',
-  })) || []
+  }))
 
   return (
     <div className="flex flex-col">
@@ -68,8 +64,14 @@ export default async function Dashboard() {
         
         {/* Dashboard content */}
         <div className="grid grid-cols-1 gap-4">
-          {/* LessonContainer now receives lessons as props */}
-          <LessonContainer initialLessons={formattedLessons}/>
+          {lessonsError ? (
+            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+              <p className="font-medium">Error loading lessons</p>
+              <p className="text-sm">{lessonsError.message}</p>
+            </div>
+          ) : (
+            <LessonContainer initialLessons={formattedLessons}/>
+          )}
         </div>
       </main>
     </div>
