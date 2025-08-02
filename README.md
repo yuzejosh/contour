@@ -8,7 +8,7 @@ This is a website I built for Contour Education over the last couple of days. It
 - **Next.js 14** (App Router, TypeScript)
 - **Tailwind CSS** for styling
 - **Supabase** for authentication
-- **Vercel** for deployment
+- **Vercel** for deployment and CI/CD
 
 ## Features
 
@@ -32,6 +32,19 @@ npm run dev
 ```
 
 3. **Open [http://localhost:3000](http://localhost:3000)** to view the site
+
+## 📘 Database Overview  
+Schema can be found in the repository at 
+
+- **Tables**:
+  - `users` – Authenticated users (managed by Supabase Auth)
+  - `lessons` – Lesson metadata (title, date, start time, etc.)
+  - `user_lessons` – Join table mapping users to their assigned lessons
+    - Includes `is_completed` boolean field to track completion
+
+- **Relationships**:
+  - `user_lessons.user_id → users.id` (FK)
+  - `user_lessons.lesson_id → lessons.id` (FK)
 
 ## Project Structure
 
